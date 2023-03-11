@@ -232,8 +232,20 @@ body {
 
 @media screen and (max-width: 426px) {
 
+    * {
+        font-size: calc(1.5rem/2);
+    }
+
     body {
         width: 100%;
+    }
+
+    .addAction {
+        width: 90%;
+    }
+
+    .route-list {
+        width: 80%;
     }
     
     .addAction label {
@@ -272,11 +284,19 @@ body {
 
 @media screen and (max-width: 376px) {
     * {
-        font-size: calc(1.1rem/2);
+        font-size: calc(1.4rem/2);
     }
 
     body {
         width: 100%;
+    }
+
+    .addAction {
+        width: 90%;
+    }
+
+    .route-list {
+        width: 80%;
     }
 
     .card .name {
@@ -288,15 +308,15 @@ body {
     }
 
     .card #send {
-        height: 10px;
+        height: 15px;
         width: 25%;
     }
 
     .card #remove {
-        height: 10px;
+        height: 15px;
     }
 
     .finalsum #get-final {
-        height: 10px;
+        height: 15px;
     }
 }
