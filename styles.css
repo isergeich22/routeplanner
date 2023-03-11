@@ -231,6 +231,10 @@ body {
 }
 
 @media screen and (max-width: 426px) {
+
+    body {
+        width: 100%;
+    }
     
     .addAction label {
         width: 20%;
@@ -269,6 +273,10 @@ body {
 @media screen and (max-width: 376px) {
     * {
         font-size: calc(1.1rem/2);
+    }
+
+    body {
+        width: 100%;
     }
 
     .card .name {
