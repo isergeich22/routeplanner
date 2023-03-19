@@ -175,7 +175,8 @@ body {
             margin-right: 1%;
         }
     
-        .finalsum input {            
+        .finalsum input {
+            width: 30%;        
             border: none;
             border-bottom: 2px solid #474747;
             font-family: var(--main-font);
@@ -185,9 +186,9 @@ body {
                 outline: none;
             }
 
-        .finalsum #get-final, .finalsum #get-start, .finalsum #get-road, .finalsum #get-leftover {
+        .finalsum button {
             height: 20px;
-            width: 100%;
+            width: 40%;
             margin: 0 2%;
             border: 1px solid #000;
             background: #fff;
@@ -196,7 +197,7 @@ body {
             font-size: .8rem;
         }
 
-            #get-final:hover, #get-start:hover, #get-road:hover, #get-leftover:hover {
+            button:hover {
                 background: #000;
                 color: #fff;
                 transition: .3s ease-in;
