@@ -84,6 +84,7 @@ body {
         width: 50%;
         margin: 0 auto;
         font-family: var(--main-font);
+        margin-bottom: 10%;
     }
 
         .route-list .card {
