@@ -3,18 +3,67 @@ const addButton = document.querySelector('#add')
 const content = document.querySelector('.route-list')
 const finalSum = document.querySelector('.finalsum')
 const total = document.querySelector('#finalsum')
+const startsum = document.querySelector('#startsum')
+const getStart = document.querySelector('#get-start')
 const getFinal = document.querySelector('#get-final')
 const lsKey = 'POINT'
+const _lsKey = 'COIN'
 
 const points = getState()
+const coins = getStateCoins()
 
+const date_ob = new Date()
+
+let day = ''
+let month = ''
+
+date_ob.getDate() - 10 < 0 ? day = `0${date_ob.getDate()}`: day = date_ob.getDate()
+date_ob.getMonth() - 10 < 0 ? month = `0${date_ob.getMonth() + 1}`: month = date_ob.getMonth()+1
+
+getStart.addEventListener('click', () => {
+    createCoin(startsum.value)
+
+    saveStateCoins()
+})
 addButton.addEventListener('click', () => {
     createPoint(input.value)
 
     saveState()
 })
 
-function createPoint (text) {
+function createCoin(text) {
+    if (text == '') {
+        startsum.classList.toggle('invalid')
+
+        setTimeout(() => {
+            startsum.classList.remove('invalid')
+        }, 3000)
+    } else {
+        const newCoin = {
+            number: parseInt(text),
+            date: `${day}/${month}`
+        }
+
+        startsum.value = ''
+
+        coins.push(newCoin)
+        saveState()
+        init()
+
+    }
+}
+
+function renderCoins() {
+    if(coins.length == 0) {
+        startsum.value = '0'
+    } else {
+        for (i = 0; i < coins.length; i++) {
+            startsum.value = `${coins[i].number}`
+        }
+    }
+}
+
+function createPoint(text) {
     if (text == '') {
         input.classList.toggle('invalid')
 
@@ -125,8 +174,17 @@ function togglePoint(event) {
     init()
 }
 
+function saveStateCoins() {
+    localStorage.setItem(_lsKey, JSON.stringify(coins))
+}
+
+function getStateCoins() {
+    const row = localStorage.getItem(_lsKey)
+    return row ? JSON.parse(row) : []
+}
+
 function saveState() {
-    localStorage.setItem(lsKey, JSON.stringify(points))
+    localStorage.setItem(lsKey, JSON.stringify(points))    
 }
 
 function getState() {
@@ -136,6 +194,7 @@ function getState() {
 
 function init() {
     renderPoints()
+    renderCoins()
 }
 
 init()
