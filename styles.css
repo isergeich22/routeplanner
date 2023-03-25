@@ -23,7 +23,7 @@ body {
         font-family: var(--main-font);
     }
 
-    .addAction {
+    .addAction, .addSend {
         margin: 2% 0;
         width: 60%;
         display: flex;
@@ -34,12 +34,12 @@ body {
         font-family: var(--main-font);
     }
 
-        .addAction label {
+        .addAction label, .addSend label {
             font-size: 1rem;
             width: 10%;
         }
 
-        .addAction #text {            
+        .addAction #text, .addSend #textSend, .addSend #textQuantity {            
             border: none;
             height: 30px;
             border-bottom: 2px solid #000;
@@ -48,7 +48,7 @@ body {
             transition: .3s ease-in;
         }
 
-            #text:focus {
+            #text:focus, #textSend:focus, #textQuantity:focus {
                 outline: none;
             }
 
@@ -58,7 +58,7 @@ body {
                 transition: .3s ease-in !important;
             }
 
-        .addAction #add {
+        .addAction #add, .addSend #addSend {
             font-size: .7rem;
             width: 16%;
             height: 30px;
@@ -70,13 +70,13 @@ body {
             transition: .3s ease-in;
         }
 
-        .addAction #add:hover {
+        .addAction #add:hover, .addSend #addSend:hover {
             background-color: #000;
             color: #fff;
             transition: .3s ease-in;
         }
 
-    .route-list {
+    .route-list, .delivery-list {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -87,7 +87,7 @@ body {
         margin-bottom: 10%;
     }
 
-        .route-list .card {
+        .route-list .card, .delivery-list .card {
             display: flex;
             flex-direction: row;
             justify-content: center;
@@ -98,12 +98,12 @@ body {
             font-family: var(--main-font);
         }
 
-            .card #done {
+            .card #done, .card #done_send {
                 width: 10%;
             }
 
             .card .name {
-                width: 56%;
+                width: 16%;
             }
 
                 .done {

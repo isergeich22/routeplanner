@@ -1,6 +1,10 @@
 const input = document.querySelector('#text')
+const inputS = document.querySelector('#textSend')
+const inputQ = document.querySelector('#textQuantity')
 const addButton = document.querySelector('#add')
+const addSend = document.querySelector('#addSend')
 const content = document.querySelector('.route-list')
+const sends_list = document.querySelector('.delivery-list')
 const finalSum = document.querySelector('.finalsum')
 const total = document.querySelector('#finalsum')
 const startsum = document.querySelector('#startsum')
@@ -15,10 +19,12 @@ const removeRoad = document.querySelector('#remove-road')
 const lsKey = 'POINT'
 const lsKey_ = 'ROAD'
 const _lsKey = 'COIN'
+const ls_Key = 'SEND'
 
 const points = getState()
 const coins = getStateCoins()
 const roads = getStateRoads()
+const sends = getStateSends()
 
 const date_ob = new Date()
 
@@ -60,6 +66,12 @@ addButton.addEventListener('click', () => {
     createPoint(input.value)
 
     saveState()
+})
+
+addSend.addEventListener('click', () => {
+    createSend(inputS.value, inputQ.value)
+
+    saveStateSends()
 })
 
 function createRoad(text) {
@@ -218,6 +230,77 @@ function renderPoints() {
     }
 }
 
+function createSend(text, quantity) {
+    if(text == '') {
+        inputS.classList.toggle('invalid')
+
+        setTimeout(() => {
+            inputS.classList.remove('invalid')
+        }, 3000)
+    } else {
+        const newSend = {
+            company: text,
+            quantity: quantity,
+            done: false
+        }
+
+        inputS.value = ''
+        inputQ.value = ''
+
+        sends.push(newSend)
+        saveStateSends()
+        init()
+    }
+}
+
+function renderSends() {
+    if(sends.length == 0) {
+        sends_list.innerHTML = `<p>There is no sends here | Здесь пока нет ни одной отправки</p>`
+    } else {
+        let html = ''
+        for(i = 0; i < sends.length; i++) {
+            if(sends[i].done != true) {
+                html += `<div class='card'>
+                            <input type="checkbox" name="done" id="done_send" ${sends[i].done} data-send="${sends[i].company}">
+                            <label class="name" for="done">${sends[i].company}</label>
+                            <label class="quantity" for="done">Количество: ${sends[i].quantity}</label>
+                            <button type="submit" id="remove" data-send="${sends[i].company}">X</button>
+                        </div>`
+            } else {
+                html += `<div class='card'>
+                            <input type="checkbox" name="done" id="done_send" data-send="${sends[i].company}" checked>
+                            <label class="name done" for="done">${sends[i].company}</label>
+                            <label class="quantity" for="done">Количество: ${sends[i].quantity}</label>
+                            <button type="submit" id="remove" data-send="${sends[i].company}">X</button>
+                        </div>`
+            }
+            sends_list.innerHTML = html
+            const checkbox_send = document.querySelectorAll('#done_send')
+            const remove = document.querySelectorAll('#remove')
+
+            checkbox_send.forEach(el => {
+                el.addEventListener('click', toggleSend)
+            })
+
+            remove.forEach(el => {
+                el.addEventListener('click', (event) => {
+                    const content = event.target.dataset.send
+                    const send = sends.find(s => s.company === content)
+                    let index = sends.indexOf(send)
+                    if(index > -1) {
+                        sends.splice(index, 1)
+                    }                    
+                    saveStateSends()
+                    init()
+                })
+            })
+
+            saveStateSends()
+
+        }
+    }
+}
+
 getFinal.addEventListener('click', countFinal)
 getLeftover.addEventListener('click', getingLeftover)
 
@@ -234,6 +317,14 @@ function countFinal() {
 
 function getingLeftover() {
     leftOver.value = parseInt(startsum.value) - (parseInt(total.value) + parseInt(finalRoad.value))
+}
+
+function toggleSend(event) {
+    const text = event.target.dataset.send
+    const send = sends.find(s => s.company === text)
+    send.done = event.target.checked
+    saveStateSends()
+    init()
 }
 
 function togglePoint(event) {
@@ -262,6 +353,15 @@ function getStateCoins() {
     return row ? JSON.parse(row) : []
 }
 
+function saveStateSends() {
+    localStorage.setItem(ls_Key, JSON.stringify(sends))
+}
+
+function getStateSends() {
+    const row = localStorage.getItem(ls_Key)
+    return row ? JSON.parse(row):[]
+}
+
 function saveState() {
     localStorage.setItem(lsKey, JSON.stringify(points))    
 }
@@ -275,6 +375,7 @@ function init() {
     renderPoints()
     renderCoins()
     renderRoads()
+    renderSends()
 }
 
 init()
