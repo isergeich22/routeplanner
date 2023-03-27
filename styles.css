@@ -266,7 +266,7 @@ body {
         width: 100%;
     }
 
-    .addAction {
+    .addAction, .addSend {
         width: 90%;
     }
 
@@ -274,7 +274,7 @@ body {
         width: 80%;
     }
     
-    .addAction label {
+    .addAction label, .addSend label {
         width: 20%;
     }
 
