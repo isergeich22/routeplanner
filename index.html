@@ -18,9 +18,34 @@
         
     </section>
     <div class="finalsum">
-        <label for="finalsum">Итого: </label><input type="text" name="finalsum" id="finalsum" value="0">
-        <button type="submit" id="get-final">Вывести</button>
+        <div class="sum-block">
+            <label for="startsum">Выдано: </label><input type="text" name="startsum" id="startsum" value="0">
+            <button type="submit" id="remove-start">Удалить</button>
+            <button type="submit" id="get-start">Подтвердить</button>
+        </div>
+        <div class="sum-block">
+            <label for="finalsum">Итого: </label><input type="text" name="finalsum" id="finalsum" value="0">
+            <button type="submit" id="get-final">Подтвердить</button>
+        </div>
+        <div class="sum-block">
+            <label for="finalroad">Проезд: </label><input type="text" name="finalroad" id="finalroad" value="0">
+            <button type="submit" id="remove-road">Удалить</button>
+            <button type="submit" id="get-road">Подтвердить</button>
+        </div>
+        <div class="sum-block">
+            <label for="finalleftover">Остаток: </label><input type="text" name="finalleftover" id="finalleftover" value="0">
+            <button type="submit" id="get-leftover">Подсчет</button>
+        </div>
     </div>
+    <section class="addSend">
+        <label>Add send:</label>
+        <label for="company">Company:</label><input type="text" name="company" id="textSend">
+        <label for="quantity">Quantity:</label><input type="text" name="quantity" id="textQuantity">
+        <button id="addSend" type="submit">ADD SEND</button>
+    </section>
+    <section class="delivery-list">
+
+    </section>
     <script src="script.js"></script>
 </body>
 </html>
